@@ -1,0 +1,86 @@
+<div>
+
+  <div class="row">
+
+    <div class="col-sm-7">
+      <h2 class="page-header">New Item</h2>
+    </div>
+
+    <div class="col-sm-5">
+      <div class="form-inline float-right">
+        <label for="item_count">Number of items added: {{this.count}}</label>
+          <span class="input-group-separator"></span>
+        <div *ngIf="this.count != 0">
+          <button (click)="compileDataFromArray()" class="btn btn-info">Send</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <form [formGroup]="purchaseOrderServices.PurchaseOrderAddItemForm" (submit)="addToArray()">
+    <div class="row">
+
+      <div class="col-sm-5">
+        <div class="form-group">
+          <label for="PO_ItemName">Name of item <span class="asterisk">*</span></label>
+          <input type="text" name="PO_ItemName" formControlName="po_i_name" class="form-control" placeholder="EG. Lenovo ThinkPad T440p"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_name').errors && (purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_name.touched || purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_name.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_name').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="PO_ItemQuantity">Quantity <span class="asterisk">*</span></label>
+          <input type="text" name="PO_ItemQuantity" formControlName="po_i_count" class="form-control" placeholder="How many?"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_count').errors && (purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_count.touched || purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_count.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_count').errors?.required" class="invalid-feedback">This field is required!</div>
+          <div *ngIf="purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_count').errors?.pattern" class="invalid-feedback">Numbers only please.</div>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="PO_ItemCost">Cost <span class="asterisk">*</span></label>
+          <input type="text" name="PO_ItemCost" formControlName="po_i_cost" class="form-control" placeholder="How much?"[ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_cost').errors && (purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_cost.touched || purchaseOrderServices.PurchaseOrderAddItemForm.controls.po_i_cost.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_cost').errors?.required" class="invalid-feedback">This field is required! </div>
+          <div *ngIf="purchaseOrderServices.PurchaseOrderAddItemForm.get('po_i_cost').errors?.pattern" class="invalid-feedback">Numbers only please.</div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_TotalCost">Unit Total Cost</label>
+          <div class="form-group">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text">₱</span></div>
+                <input type="text" name="PO_UnitTotalCost" formControlName="po_ut" [value]="computeForTotalCost()" class="form-control" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+      <div class="col-sm-1">
+        <input type="submit" class="btn btn-info" [disabled]="purchaseOrderServices.PurchaseOrderAddItemForm.invalid" value="Add">
+      </div>
+
+      <div class="col-sm-5">
+        <small class="form-text"  style="color: red;">Fields marked with asterisk(*) are required.</small>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "provproject",
+  "version": "1.0.0",
+  "description": "ProV Inventory System",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  
+  "dependencies": {
+    "express": "*",
+    
+    "body-parser": "*",
+    "cors": "*",
+    "mongoose": "*",
+
+    "jsonwebtoken": "*",    
+    "passport": "*",
+    "passport-jwt": "*",
+
+    "moment": "^2.24.0",
+    "dateformat": "*"
+  },
+  
+  "author": "Kyle Ledesma",
+  "license": "ISC"
+}
+
+

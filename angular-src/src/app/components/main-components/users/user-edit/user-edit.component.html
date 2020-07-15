@@ -1,0 +1,65 @@
+<div>
+
+  <div class="input-group">
+    <h2 class="page-header">Edit User</h2>
+  </div>
+
+  <hr>
+
+  <form [formGroup]="userServices.UserForm" (submit)="onSubmit()">
+    <input type="hidden" name="_id" formControlName="_id">
+    <input type="hidden" name="__v" formControlName="__v">
+
+    <div class="form-group">
+      <div class="row">
+        
+        <div class="col-sm-4">
+          <label for="U_LastName">Last Name <span class="asterisk">*</span></label>
+          <input type="text" name="U_LastName" formControlName="user_lname" class="form-control" placeholder="Last name"
+          [ngClass]="{'is-invalid' : userServices.UserForm.get('user_lname').errors && (userServices.UserForm.controls.user_lname.touched || userServices.UserForm.controls.user_lname.dirty)}">
+          <div *ngIf="userServices.UserForm.get('user_lname').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+
+        <div class="col-sm-4">
+          <label for="U_LastName">Given Name <span class="asterisk">*</span></label>
+          <input type="text" name="U_FirstName" formControlName="user_fname" class="form-control" placeholder="Given Name"
+          [ngClass]="{'is-invalid' : userServices.UserForm.get('user_fname').errors && (userServices.UserForm.controls.user_fname.touched || userServices.UserForm.controls.user_fname.dirty)}">
+          <div *ngIf="userServices.UserForm.get('user_fname').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+
+        <div class="col-sm-4">
+          <label for="U_LastName">Middle Name</label>
+          <input type="text" name="U_MiddleName" formControlName="user_mname" class="form-control" placeholder="Middle name">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username <span class="asterisk">*</span></label>
+      <input type="text" name="U_Username" formControlName="username" class="form-control" placeholder="Enter Username"
+      [ngClass]="{'is-invalid' : userServices.UserForm.get('username').errors && (userServices.UserForm.controls.username.touched || userServices.UserForm.controls.username.dirty)}">
+      <div *ngIf="userServices.UserForm.get('username').errors" class="invalid-feedback">This field is required!</div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password <span class="asterisk">*</span></label>
+      <input type="password" name="U_Password" formControlName="password" class="form-control" placeholder="Enter Password"
+      [ngClass]="{'is-invalid' : userServices.UserForm.get('password').errors && (userServices.UserForm.controls.password.touched || userServices.UserForm.controls.password.dirty)}">
+      <div *ngIf="userServices.UserForm.get('password').errors" class="invalid-feedback">This field is required!</div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-2">
+        <input type="submit" class="btn btn-info" [disabled]="userServices.UserForm.invalid" value="Submit">
+      </div>
+
+      <div class="col-sm-5">
+        <small class="form-text" style="color: red;">Fields marked with asterisk(*) are required.</small>
+      </div>
+
+    </div>
+
+  </form>
+</div>

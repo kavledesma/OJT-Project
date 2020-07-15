@@ -1,0 +1,137 @@
+<div>
+
+  <div class="row">
+
+    <div class="col-sm-10">
+      <h2 class="page-header">{{purchaseOrderServices.PurchaseOrderForm.controls._id.value ? "Edit Purchase Order" : "New Purchase Order"}}</h2>
+    </div>
+
+    <div class="col-sm-2">
+      <button (click)="onAddNewItem()" class="btn btn-info" [disabled]="purchaseOrderServices.PurchaseOrderForm.invalid">Add items</button>
+    </div>
+
+  </div>
+  
+  <hr>
+  
+  <form [formGroup]="purchaseOrderServices.PurchaseOrderForm" (submit)="onSubmit()">
+    <input type="hidden" name="id" formControlName = "_id">
+    <input type="hidden" name="__v" formControlName = "__v">
+
+    <div class="row" >
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_ID">Purchase Order ID <span class="asterisk">*</span></label>
+          <input type="text" name="PO_ID" formControlName="po_id" class="form-control" placeholder="EG. IT-YYYY-MM-#" 
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_id').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_id.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_id.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_id').errors?.required" class="invalid-feedback">This field is required!</div>
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_id').errors?.pattern" class="invalid-feedback">Pattern must be 'IT-YYYY-MM-#'</div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_Date">Date Ordered <span class="asterisk">*</span></label>
+          <input type="text" name="PO_Date" formControlName="po_date" bsDatepicker [bsConfig]="{adaptivePosition: true}" class="form-control" placeholder="MM/DD/YYYY"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_date').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_date.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_date.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_date').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_DateOfItemReceived">Date Received</label>
+          <input type="text" name="PO_DateOfItemReceived" formControlName="po_d_rcvd" bsDatepicker [bsConfig]="{adaptivePosition: true}" class="form-control" placeholder="MM/DD/YYYY">
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_POStatus">Status <span class="asterisk">*</span></label>
+          <select name="PO_POStatus" formControlName="po_stat" class="custom-select"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_stat').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_stat.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_stat.dirty)}">
+            <option value="On Process">On Process</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_stat').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="row">
+
+      <div class="col-sm-9">
+        <div class="form-group">
+          <label for="PO_SupplierName">Name of supplier <span class="asterisk">*</span></label>
+          <input type="text" name="PO_SupplierName" formControlName="po_s_name" class="form-control" placeholder="EG. ABC Corp"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_s_name').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_s_name.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_s_name.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_s_name').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="PO_TotalCost">Total Cost <span class="asterisk">*</span></label>
+          <div class="form-group">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text">₱</span></div>
+                <input type="text" name="PO_TotalCost" formControlName="po_t" [value]="purchaseOrderServices.PurchaseOrderForm.value.po_t" class="form-control" placeholder="₱₱₱₱₱" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="form-group">
+      <label for="PO_ItemDscription">Item Description <span class="asterisk">*</span></label>
+      <input type="text" name="PO_ItemDscription" formControlName="po_i_desc" class="form-control" [value]="purchaseOrderServices.PurchaseOrderForm.value.po_i_desc" placeholder="EG. Name of item (Quantity)(Unit Cost)   ..." readonly>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="PO_Client">Client/Project <span class="asterisk">*</span></label>
+          <input type="text" name="PO_Client" formControlName="po_client" class="form-control" placeholder="EG. ProV/Circor/etc."
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_client').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_client.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_client.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_client').errors?.required" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="PO_NameOfItemReceiver">Received by <span class="asterisk">*</span></label>
+          <input type="text" name="PO_NameOfItemReceiver" formControlName="po_rcvr" class="form-control" placeholder="Who received the item?"
+          [ngClass]="{'is-invalid' : purchaseOrderServices.PurchaseOrderForm.get('po_rcvr').errors && (purchaseOrderServices.PurchaseOrderForm.controls.po_rcvr.touched || purchaseOrderServices.PurchaseOrderForm.controls.po_rcvr.dirty)}">
+          <div *ngIf="purchaseOrderServices.PurchaseOrderForm.get('po_rcvr').errors?.required" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="PO_Remarks">Remarks</label>
+          <input type="text" name="PO_Remarks" formControlName="po_remarks" class="form-control" placeholder="Comments, etc., ...">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-1">
+        <input type="submit" class="btn btn-info" [disabled]="purchaseOrderServices.PurchaseOrderForm.invalid || (!purchaseOrderServices.PurchaseOrderForm.value.po_i_desc && !purchaseOrderServices.PurchaseOrderForm.value.po_t)" value="Submit">
+      </div>
+
+      <div class="col-sm-5">
+        <small class="form-text" style="color: red;">Fields marked with asterisk(*) are required.</small>
+      </div>
+
+    </div>
+
+  </form>
+</div>

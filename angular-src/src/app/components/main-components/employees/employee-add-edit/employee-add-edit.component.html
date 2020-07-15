@@ -1,0 +1,152 @@
+<div>
+  <h2 class="page-header">{{employeeServices.EmployeeForm.controls._id.value ? "Edit Employee Record" : "New Employee"}}</h2>
+
+  <hr>
+  
+  <form [formGroup]="employeeServices.EmployeeForm" (submit)="onSubmit()">
+    <input type="hidden" name="id" formControlName = "_id">
+    <input type="hidden" name="__v" formControlName = "__v">
+
+    <div class="row">
+
+      <div class="col-sm-10">
+        <div class="form-group">
+          <label for="Emp_ID">Employee ID</label>
+          <input type="text" name="Emp_ID" formControlName="emp_id" class="form-control" placeholder="Enter employee ID">
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label for="Emp_Status">Status <span class="asterisk">*</span></label>
+          <select name="Emp_Status" formControlName="emp_stat" class="custom-select"
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_stat').errors && (employeeServices.EmployeeForm.controls.emp_stat.touched || employeeServices.EmployeeForm.controls.emp_stat.dirty)}">
+            <option value="Active">Active</option>
+            <option value="Resigned">Resigned</option>
+            <option value="Pending">Pending</option>
+          </select>
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_stat').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="Emp_LastName">Last Name <span class="asterisk">*</span></label>
+          <input type="text" name="Emp_LastName" formControlName="emp_lname" class="form-control" placeholder="Last name"
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_lname').errors && (employeeServices.EmployeeForm.controls.emp_lname.touched || employeeServices.EmployeeForm.controls.emp_lname.dirty)}">
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_lname').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="Emp_FirstName">Given Name <span class="asterisk">*</span></label>
+          <input type="text" name="Emp_FirstName" formControlName="emp_fname" class="form-control" placeholder="Given name"
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_fname').errors && (employeeServices.EmployeeForm.controls.emp_fname.touched || employeeServices.EmployeeForm.controls.emp_fname.dirty)}">
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_fname').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="Emp_FirstName">Middle Name</label>
+          <input type="text" name="Emp_MiddleName" formControlName="emp_mname" class="form-control" placeholder="Middle name">
+        </div>
+      </div>
+
+      <div class="col-sm-1">
+        <div class="form-group">
+          <label for="Emp_Suffix">Suffix</label>
+          <input type="text" name="Emp_Suffix" formControlName="emp_sfx" class="form-control" placeholder="SFX">
+        </div>
+      </div>
+
+    </div>    
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="Emp_HireDate">Date Hired <span class="asterisk">*</span></label>
+          <input type="text" name="Emp_HireDate" formControlName="emp_hdate" bsDatepicker [bsConfig]="{ adaptivePosition: true }" class="form-control" placeholder="MM/DD/YYYY"
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_hdate').errors && (employeeServices.EmployeeForm.controls.emp_hdate.touched || employeeServices.EmployeeForm.controls.emp_hdate.dirty)}">
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_hdate').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="form-group">
+          <label for="Emp_JobTitle">Job Title <span class="asterisk">*</span></label>
+          <input type="text" name="Emp_JobTitle" formControlName="emp_jtitle" class="form-control" placeholder="EG. Software Developer/IT Support/etc."
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_jtitle').errors && (employeeServices.EmployeeForm.controls.emp_jtitle.touched || employeeServices.EmployeeForm.controls.emp_jtitle.dirty)}">
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_jtitle').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="Emp_Department">Department <span class="asterisk">*</span></label>
+          <input type="text" name="Emp_Department" formControlName="emp_dept" class="form-control" placeholder="EG. IT/HR/etc."
+          [ngClass]="{'is-invalid' : employeeServices.EmployeeForm.get('emp_dept').errors && (employeeServices.EmployeeForm.controls.emp_dept.touched || employeeServices.EmployeeForm.controls.emp_dept.dirty)}">
+          <div *ngIf="employeeServices.EmployeeForm.get('emp_dept').errors" class="invalid-feedback">This field is required!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Emp_SkypeID">Skype ID</label>
+          <input type="mail" name="Emp_SkypeID" formControlName="emp_skype" class="form-control" placeholder="name@prov.intl.com">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Emp_DomainLog">Domain Log</label>
+          <input type="text" name="Emp_DomainLog" formControlName="emp_domlog" class="form-control" placeholder="name@prov.intl.com">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Emp_FingerprintNumber">Fingerprint ID</label>
+          <input type="text" name="Emp_FingerprintNumber" formControlName="emp_fprint" class="form-control" placeholder="Enter fingerprint ID">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="Emp_BadgeID">Badge ID</label>
+          <input type="text" name="Emp_BadgeID" formControlName="emp_badge" class="form-control" placeholder="Enter badge ID">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-1">
+        <input type="submit" class="btn btn-info" [disabled]="employeeServices.EmployeeForm.invalid" value="Submit">
+      </div>
+
+      <div class="col-sm-5">
+        <small class="form-text" style="color: red;">Fields marked with asterisk(*) are required.</small>
+      </div>
+
+    </div>
+    
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<h2 class="page-header" >Login</h2>
+
+<hr>
+
+<form [formGroup]="userServices.LoginForm" (submit)="onLoginSubmit()">
+
+  <div class="form-group">
+    <label for="Username">Username <span class="asterisk">*</span></label>
+    <input type="text" name="username" formControlName="username" class="form-control" placeholder="Enter Username"
+    [ngClass]="{'is-invalid' : userServices.LoginForm.get('username').errors && (userServices.LoginForm.controls.username.touched || userServices.LoginForm.controls.username.dirty)}">
+    <div *ngIf="userServices.LoginForm.get('username').errors" class="invalid-feedback">This field is required!</div>
+  </div>
+
+  <div class="form-group">
+    <label for="Password">Password <span class="asterisk">*</span></label>
+    <input type="password" name="password" formControlName="password" class="form-control" placeholder="Enter Password"
+    [ngClass]="{'is-invalid' : userServices.LoginForm.get('password').errors && (userServices.LoginForm.controls.password.touched || userServices.LoginForm.controls.password.dirty)}">
+    <div *ngIf="userServices.LoginForm.get('password').errors" class="invalid-feedback">This field is required!</div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-2">
+      <input class="btn btn-info" [disabled]="userServices.LoginForm.invalid" type="submit" value="Login">
+    </div>
+
+    <div class="col-sm-5">
+        <small class="form-text"  style="color: red;">Fields marked with asterisk(*) are required.</small>
+    </div>
+
+  </div>
+
+</form>
